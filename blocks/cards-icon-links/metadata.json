@@ -1,0 +1,19 @@
+{
+  "variantName": "cards-icon-links",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Grid of quick links, each a centered outline icon, small label and a text link",
+    "description": "White band, 4 columns (1/2/4 responsive). Each item centered: thin-line outline icon, small grey label, underlined blue bold link below."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per item: cell 1 = icon or image, cell 2 = label paragraph + link",
+    "sectionMetadata": [],
+    "sourceSelector": "#__next > main.jsx-2228787498 > section._bg-white_10b8a_958._container_10lb0_955._contained_10lb0_958._padded_10lb0_963._content-container_1s99e_955._spacing-72-48_1s99e_955"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "1/2/4-column responsive grid without card chrome. Links render as text links, not buttons.",
+  "reuseGuidance": "Use for icon-led quick-link rows. For photo article teasers use `cards-article`.",
+  "sourceUrl": "https://www.advocatehealth.com/"
+}

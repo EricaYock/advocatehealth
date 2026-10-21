@@ -1,10 +1,16 @@
-// Delayed functionality – martech and the global social share dock
+// Delayed functionality – analytics and the optional social share dock
 import {
-  buildBlock, decorateBlock, loadBlock, loadScript,
+  buildBlock, decorateBlock, getMetadata, loadBlock, loadScript,
 } from './aem.js';
 import { createTag } from './shared.js';
 
+/**
+ * The social share dock is opt-in per page: add `social-share: on` to the
+ * page metadata to show it. advocatehealth.com has no share widget, so it is
+ * off by default.
+ */
 async function injectSocialShareBlock() {
+  if (!/^(on|true|yes)$/i.test(getMetadata('social-share').trim())) return;
   const main = document.querySelector('main');
   if (!main || main.querySelector('.social-share')) return;
 

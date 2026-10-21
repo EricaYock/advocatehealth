@@ -1,4 +1,4 @@
-import { getMetadata } from './aem.js';
+import { getMetadata, toCamelCase } from './aem.js';
 
 /**
  * Locale config: maps URL prefix to locale metadata.
@@ -358,4 +358,28 @@ export function getBlockContext(block) {
     eventRoot: isEmbed ? root : document,
     isEmbed,
   };
+}
+
+const placeholdersCache = {};
+
+/**
+ * Fetch author-managed UI strings from the locale's placeholders sheet
+ * (`{locale prefix}/placeholders.json`, columns `Key` and `Text`).
+ * Keys are camel-cased (e.g. "Previous Slide" -> `previousSlide`).
+ * Resolves to an empty object when the sheet is missing so callers can
+ * fall back to defaults.
+ * @param {string} [prefix] - Locale path prefix (defaults to current locale)
+ * @returns {Promise<Record<string, string>>}
+ */
+export function fetchPlaceholders(prefix = getLocale().prefix) {
+  if (!placeholdersCache[prefix]) {
+    placeholdersCache[prefix] = fetch(`${prefix}/placeholders.json`)
+      .then((resp) => (resp.ok ? resp.json() : { data: [] }))
+      .then((json) => (json.data || []).reduce((acc, row) => {
+        if (row.Key) acc[toCamelCase(row.Key)] = row.Text;
+        return acc;
+      }, {}))
+      .catch(() => ({}));
+  }
+  return placeholdersCache[prefix];
 }

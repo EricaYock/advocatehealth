@@ -1,0 +1,23 @@
+{
+  "variantName": "carousel-callout",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Rotating text-only callouts: heading, paragraph and a CTA per slide",
+    "description": "Solid dark wellness-blue band with padding. Rotating text-only callouts (2 slides): white H3, paragraph, white button (Learn more about us / Take a quiz). Arrow/pause/dot controls centered below."
+  },
+  "contentPattern": {
+    "structure": "1 or 2 columns, one row per slide: content cell = heading, paragraph, CTA link (an optional image cell is supported)",
+    "sectionMetadata": [
+      {
+        "style": "dark-blue"
+      }
+    ],
+    "sourceSelector": "#__next > main.jsx-2228787498 > div._bg-wellness-blue_10b8a_964._container_10lb0_955._contained_10lb0_958._padded_10lb0_963:nth-of-type(6)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Place in a section styled `dark-blue`. Autoplays with prev/pause/next and dot controls below.",
+  "reuseGuidance": "Use for rotating text-only messages. Use `carousel-promo` when slides carry an image.",
+  "sourceUrl": "https://www.advocatehealth.com/"
+}

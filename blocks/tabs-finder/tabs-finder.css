@@ -1,0 +1,74 @@
+/* tabs-finder: structural styles only; colors/typography come from the design pass */
+.tabs-finder .tabs-finder-list {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 2px solid currentcolor;
+}
+
+.tabs-finder .tabs-finder-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-finder .tabs-finder-tab {
+  appearance: none;
+  flex: 1 0 auto;
+  margin: 0 0 -2px;
+  padding: 12px 16px;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tabs-finder .tabs-finder-tab[aria-selected='true'] {
+  border-bottom-color: currentcolor;
+  font-weight: 700;
+}
+
+.tabs-finder .tabs-finder-tab:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: -2px;
+}
+
+.tabs-finder .tabs-finder-panel {
+  padding-block: 24px;
+}
+
+.tabs-finder .tabs-finder-panel[hidden] {
+  display: none;
+}
+
+.tabs-finder .tabs-finder-panel:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.tabs-finder .tabs-finder-panel > :first-child {
+  margin-top: 0;
+}
+
+.tabs-finder .tabs-finder-panel > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 600px) {
+  .tabs-finder .tabs-finder-tab {
+    flex: 1 1 0;
+  }
+}
+
+@media (width >= 900px) {
+  .tabs-finder .tabs-finder-tab {
+    padding: 16px 24px;
+  }
+
+  .tabs-finder .tabs-finder-panel {
+    padding-block: 32px;
+    text-align: center;
+  }
+}

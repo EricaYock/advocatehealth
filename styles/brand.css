@@ -1,0 +1,75 @@
+/*
+ * Brand tokens extracted from https://www.advocatehealth.com/ (computed styles).
+ * See migration-work/brand.json for the raw extraction.
+ * Mobile-first; desktop values switch at 1200px like the source.
+ */
+
+:root {
+  /* palette */
+  --brand-blue: #1175a7; /* rgb(17 117 167) – links, primary buttons, accents */
+  --brand-navy: #003b5c; /* rgb(0 59 92) – "wellness blue" sections, hover */
+  --brand-text: #3c3c3c; /* rgb(60 60 60) – body copy and headings */
+  --brand-text-muted: #4a4a4a; /* rgb(74 74 74) */
+  --brand-white-smoke: #f4f5f5; /* rgb(244 245 245) – light grey sections */
+  --brand-gray-border: #d9d9d6;
+  --brand-white: #fff;
+
+  /* fonts */
+  --brand-font-family: montserrat, montserrat-fallback, sans-serif;
+  --body-font-family: var(--brand-font-family);
+  --heading-font-family: var(--brand-font-family);
+
+  /* base colors */
+  --background-color: var(--brand-white);
+  --text-color: var(--brand-text);
+  --link-color: var(--brand-blue);
+  --link-hover-color: var(--brand-navy);
+
+  /* typography – body is 16/24 at every breakpoint */
+  --body-font-size-m: 16px;
+  --body-line-height: 1.5;
+
+  /* heading sizes (mobile) */
+  --heading-font-size-xxl: 24px; /* h1 */
+  --heading-font-size-xl: 24px; /* h2 */
+  --heading-font-size-l: 20px; /* h3 */
+  --heading-font-size-m: 18px; /* h4 */
+  --heading-font-size-s: 16px; /* h5 */
+  --heading-font-size-xs: 16px; /* h6 */
+  --heading-line-height-xxl: 32px;
+  --heading-line-height-xl: 32px;
+  --heading-line-height-l: 32px;
+  --heading-line-height-m: 24px;
+  --heading-line-height-s: 24px;
+  --heading-line-height-xs: 24px;
+
+  /* layout */
+  --content-max-width: 1440px;
+  --content-max-width-narrow: 1292px; /* 1196px content + gutters ("contained-small") */
+  --content-gutter: 16px;
+  --section-spacing: 32px; /* margin between white sections */
+  --section-padding: 40px; /* inner padding of coloured sections */
+
+  /* buttons */
+  --button-radius: 4px;
+  --button-border-width: 2px;
+  --button-padding-block: 8px;
+  --button-padding-inline: 32px;
+}
+
+@media (width >= 1200px) {
+  :root {
+    --heading-font-size-xxl: 36px;
+    --heading-font-size-xl: 28px;
+    --heading-font-size-l: 24px;
+    --heading-font-size-m: 20px;
+    --heading-font-size-s: 18px;
+    --heading-line-height-xxl: 48px;
+    --heading-line-height-xl: 36px;
+    --heading-line-height-m: 28px;
+    --content-gutter: 48px;
+    --section-spacing: 64px;
+    --section-padding: 72px;
+    --button-padding-block: 16px;
+  }
+}

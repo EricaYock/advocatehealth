@@ -1,0 +1,19 @@
+{
+  "variantName": "carousel-hero",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Full-bleed rotating hero; each slide has a background photo with heading, short text and a CTA overlaid",
+    "description": "Full-width rotating hero (3 slides, fade). Dark photo with text left: white H1, short paragraph, solid blue button. Prev/pause/next arrows and dot pagination centered at bottom."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per slide: cell 1 = background image (optional), cell 2 = heading (H1 on the first slide, H2 on the rest), paragraph, CTA link",
+    "sectionMetadata": [],
+    "sourceSelector": "#__next > main.jsx-2228787498 > div.swiper.swiper-fade.swiper-initialized.swiper-horizontal.swiper-watch-progress._hero-banner-carousel_175t4_955.swiper-backface-hidden"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Top-of-page hero with 2+ rotating messages. Autoplays (6s, cross-fade) with prev/pause/next and dot controls; autoplay is off when the user prefers reduced motion. A single row renders as a static hero without controls.",
+  "reuseGuidance": "Use for page-top rotating banners with full-width imagery. For a static hero use `hero`; for contained image+text promos use `carousel-promo`.",
+  "sourceUrl": "https://www.advocatehealth.com/"
+}

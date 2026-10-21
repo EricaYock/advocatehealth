@@ -1,0 +1,23 @@
+{
+  "variantName": "carousel-promo",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Contained rotating promo with image left and heading, text and CTA right",
+    "description": "Solid dark wellness-blue (#00365b-ish) band with padding. Rotating promo (2 slides): image left (~40%), white H3 + paragraph + white outlined button right. Arrow/pause/dot controls centered below."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per slide: cell 1 = image, cell 2 = heading, paragraph, CTA link",
+    "sectionMetadata": [
+      {
+        "style": "dark-blue"
+      }
+    ],
+    "sourceSelector": "#__next > main.jsx-2228787498 > div._bg-wellness-blue_10b8a_964._container_10lb0_955._contained_10lb0_958._padded_10lb0_963:nth-of-type(3)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Place in a section styled `dark-blue` (section metadata). Image ~40% left on desktop, stacked on mobile. Autoplays with prev/pause/next and dot controls below.",
+  "reuseGuidance": "Use for mid-page rotating promos with a contained image. For text-only messages use `carousel-callout`; for full-bleed page-top imagery use `carousel-hero`.",
+  "sourceUrl": "https://www.advocatehealth.com/"
+}

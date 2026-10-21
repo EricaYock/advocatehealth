@@ -1,0 +1,146 @@
+{
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://www.advocatehealth.com/"
+      ],
+      "representativeUrl": "https://www.advocatehealth.com/",
+      "description": "Advocate Health Care homepage: hero carousel, finder tabs, quick links, promo and callout carousels, featured services, news cards",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            "main > [class*=\"hero-banner-carousel_\"]"
+          ]
+        },
+        {
+          "name": "tabs-finder",
+          "instances": [
+            "main > [class*=\"tabbed-container_\"]"
+          ]
+        },
+        {
+          "name": "cards-icon-links",
+          "instances": [
+            "[class*=\"column-grid_\"]:has(> [class*=\"icon-cta-simplified-card_\"])"
+          ]
+        },
+        {
+          "name": "carousel-promo",
+          "instances": [
+            "main > [class*=\"bg-wellness-blue_\"]:has(.swiper-slide img) > .swiper"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "[class*=\"cards-grid_\"]"
+          ]
+        },
+        {
+          "name": "carousel-callout",
+          "instances": [
+            "main > [class*=\"bg-wellness-blue_\"]:not(:has(.swiper-slide img)) > .swiper"
+          ]
+        }
+      ],
+      "urlPattern": "/",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero carousel",
+          "selector": [
+            "main > [class*=\"hero-banner-carousel_\"]"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Find a doctor / Find a location finder",
+          "selector": [
+            "main > [class*=\"tabbed-container_\"]"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-finder"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Quick links icon grid",
+          "selector": [
+            "main > section:has([class*=\"icon-cta-simplified-card_\"])"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-icon-links"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Promo banner carousel",
+          "selector": [
+            "main > [class*=\"bg-wellness-blue_\"]:has(.swiper-slide img)"
+          ],
+          "style": "dark-blue",
+          "blocks": [
+            "carousel-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5",
+          "name": "Featured services",
+          "selector": [
+            "main > [class*=\"contained-small_\"]:has(> div > h2)"
+          ],
+          "style": "centered",
+          "blocks": [],
+          "defaultContent": [
+            "h2",
+            "[class*=\"column-grid_\"]",
+            "[class*=\"content-container-cta_\"]"
+          ]
+        },
+        {
+          "id": "section-6",
+          "name": "News for you",
+          "selector": [
+            "main > [class*=\"bg-white-smoke_\"]"
+          ],
+          "style": "light-grey, centered",
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            "h2",
+            "[class*=\"support-copy_\"]",
+            "[class*=\"content-container-cta_\"]"
+          ]
+        },
+        {
+          "id": "section-7",
+          "name": "Callout carousel",
+          "selector": [
+            "main > [class*=\"bg-wellness-blue_\"]:not(:has(.swiper-slide img))"
+          ],
+          "style": "dark-blue",
+          "blocks": [
+            "carousel-callout"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "projectType": "da"
+  }
+}

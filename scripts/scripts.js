@@ -167,12 +167,36 @@ async function inlineColorIcons(scope) {
   });
 }
 
+/**
+ * Applies authored Section Metadata (style → classes, other keys → data attributes)
+ * to each section and removes the metadata table.
+ * @param {Element} main The main element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > div.section div.section-metadata').forEach((sectionMeta) => {
+    const section = sectionMeta.closest('.section');
+    const meta = readBlockConfig(sectionMeta);
+    Object.keys(meta).forEach((key) => {
+      if (key === 'style') {
+        meta.style.split(',').map((s) => toClassName(s.trim())).filter(Boolean)
+          .forEach((s) => section.classList.add(s));
+      } else {
+        section.dataset[toCamelCase(key)] = meta[key];
+      }
+    });
+    const wrapper = sectionMeta.parentElement;
+    sectionMeta.remove();
+    if (wrapper && !wrapper.children.length) wrapper.remove();
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   inlineColorIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   if (document.contains(main)) initPageSchemas();
 }
@@ -408,26 +432,6 @@ async function loadLazy(doc) {
 
   loadFooter(footerEl);
   if (!IS_EDITOR) await martechLazy();
-
-  /* Scroll reveal: sections below the viewport animate in as they enter */
-  if (main && 'IntersectionObserver' in window) {
-    const vH = window.innerHeight;
-    const revealSections = [...main.querySelectorAll('.section')].filter((s) => {
-      const { top } = s.getBoundingClientRect();
-      return top > vH;
-    });
-    if (revealSections.length) {
-      revealSections.forEach((s) => s.classList.add('will-reveal'));
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(({ target, isIntersecting }) => {
-          if (!isIntersecting) return;
-          target.classList.add('revealed');
-          revealObserver.unobserve(target);
-        });
-      }, { rootMargin: '0px 0px -60px 0px' });
-      revealSections.forEach((s) => revealObserver.observe(s));
-    }
-  }
 
   /* Header scroll shadow: add .scrolled class once user scrolls past nav height */
   const navWrapper = doc.querySelector('.nav-wrapper');

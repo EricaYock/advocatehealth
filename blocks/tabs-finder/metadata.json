@@ -1,0 +1,19 @@
+{
+  "variantName": "tabs-finder",
+  "baseBlock": "tabs",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Tabbed finder band (e.g. Find a doctor / Find a location) with an authorable panel per tab",
+    "description": "White band. Two large text tabs (\"Find a doctor\" active with blue underline, \"Find a location\") spanning the content width; below, a provider search form: keyword input, Insurance dropdown, Near (required) location dropdown, blue Search button."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per tab: cell 1 = tab label, cell 2 = panel content (text and a link to the finder app, e.g. /doctors or /locations)",
+    "sectionMetadata": [],
+    "sourceSelector": "#__next > main > div._tabbed-container_18173_956"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Self-contained tabs inside one block (unlike `tabs`, which groups sections). Accessible tablist with arrow/Home/End keys. The source provider-search form is a third-party app; panels hold an authorable link to it.",
+  "reuseGuidance": "Use for small in-block tab sets with short panel content. For tabs that wrap whole sections use `tabs`.",
+  "sourceUrl": "https://www.advocatehealth.com/"
+}

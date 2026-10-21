@@ -1,0 +1,23 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Grid of article teasers: image, linked title and short description",
+    "description": "Light grey (white-smoke) band with padding. Centered H2, two-line intro paragraph and underlined \"Sign up\" link; 4-column article cards (image top, bold underlined blue title link, grey description); centered \"See all our stories\" link below."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per article: cell 1 = image, cell 2 = title link + description paragraph",
+    "sectionMetadata": [
+      {
+        "style": "light-grey, centered"
+      }
+    ],
+    "sourceSelector": "#__next > main.jsx-2228787498 > div._bg-white-smoke_10b8a_961._container_10lb0_955._contained_10lb0_958._padded_10lb0_963._content-container_1s99e_955._spacing-72-48_1s99e_955"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Place in a section styled `light-grey, centered`; section heading, intro and \"See all\" link stay as default content around the block. 1/2/4-column responsive grid.",
+  "reuseGuidance": "Use for news/story teaser grids. For icon quick links use `cards-icon-links`.",
+  "sourceUrl": "https://www.advocatehealth.com/"
+}
