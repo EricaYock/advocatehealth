@@ -288,13 +288,16 @@ main .carousel-hero a.button.primary:hover {
 }
 
 /*
- * caption option: contained news slider. Linked photo with a dark translucent
- * caption bar holding the linked title; arrows at the sides, dots below.
+ * caption option: contained news slider (source: ahchealthenews.com #news-slider).
+ * Linked photo with a translucent caption bar holding the linked title, dots below,
+ * grey chevrons in the gutters beside the photo from 900px.
  * Every rule is scoped to .carousel-hero.caption so the default hero is untouched.
  */
+
+/* full-bleed on phones like the source; contained from 600px */
 main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
-  max-width: var(--content-max-width-narrow);
-  padding: 0 var(--content-padding-inline);
+  max-width: var(--content-max-width);
+  padding: 0;
 }
 
 .carousel-hero.caption .carousel-hero-slides > .carousel-hero-slide {
@@ -303,11 +306,12 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
   min-height: 0;
 }
 
+/* photo band: 260px, 450px from 900px; image cropped around its centre */
 .carousel-hero.caption .carousel-hero-slide-image {
   position: relative;
   inset: auto;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 260px;
+  aspect-ratio: auto;
 }
 
 .carousel-hero.caption .carousel-hero-slide-image::after {
@@ -323,6 +327,7 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
   object-position: center;
 }
 
+/* caption bar: rgb(0 0 0 / 30%), 25px block padding, centred bold white title */
 .carousel-hero.caption .carousel-hero-slide-content {
   position: absolute;
   inset: auto 0 0;
@@ -332,8 +337,8 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
   width: auto;
   max-width: none;
   margin: 0;
-  padding: 8px 16px;
-  background-color: rgb(0 0 0 / 60%);
+  padding: 25px 0;
+  background-color: rgb(0 0 0 / 30%);
   color: var(--brand-white);
   text-align: center;
 }
@@ -348,9 +353,10 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
 }
 
 .carousel-hero.caption .carousel-hero-slide-content :is(h1, h2, h3, p) {
-  font-size: var(--body-font-size-m);
-  line-height: var(--body-line-height);
-  font-weight: 600;
+  margin: 0 0 8px;
+  font-size: 17.6px;
+  font-weight: 700;
+  line-height: 17.6px;
   text-shadow: none;
 }
 
@@ -364,18 +370,25 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
   text-decoration: underline;
 }
 
-/* controls sit below the photo: prev, pause/play, dots, next */
+/* controls below the photo: 81px band, 16px dots 30px apart, centred 27px below it */
 .carousel-hero.caption > .carousel-hero-controls {
   position: static;
-  gap: 4px;
-  margin-top: 8px;
-  color: var(--link-color);
+  gap: 0;
+  height: auto;
+  margin: 0;
+  padding: 5px 0 32px;
+  color: #05537b;
 }
 
+/* the source has no arrows on phones; the dots stay as the slide navigation */
 .carousel-hero.caption .carousel-hero-controls .carousel-hero-prev,
 .carousel-hero.caption .carousel-hero-controls .carousel-hero-next {
-  width: 32px;
-  color: var(--brand-text-muted);
+  display: none;
+}
+
+/* pause/play hangs left of the dots so the dots stay centred like the source */
+.carousel-hero.caption .carousel-hero-controls .carousel-hero-toggle {
+  margin-inline-start: -16px;
 }
 
 .carousel-hero.caption .carousel-hero-controls .carousel-hero-toggle::before {
@@ -391,34 +404,71 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
 }
 
 .carousel-hero.caption .carousel-hero-controls .carousel-hero-indicator button {
-  width: 24px;
+  width: 30px;
 }
 
 .carousel-hero.caption .carousel-hero-controls .carousel-hero-indicator button::before {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-width: 2px;
 }
 
 @media (width >= 600px) {
-  .carousel-hero.caption .carousel-hero-slide-image {
-    height: auto;
-    aspect-ratio: 2.46;
+  main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
+    padding: 0 var(--content-padding-inline);
   }
 
-  .carousel-hero.caption .carousel-hero-slide-content {
-    padding: 16px 24px;
+  .carousel-hero.caption .carousel-hero-slide-image {
+    height: 260px;
+    aspect-ratio: auto;
   }
 
   .carousel-hero.caption .carousel-hero-slide-content :is(h1, h2, h3, p) {
-    font-size: var(--heading-font-size-l);
-    line-height: var(--heading-line-height-l);
+    font-size: 24px;
+    line-height: 24px;
   }
 }
 
 @media (width >= 900px) {
-  .carousel-hero.caption > .carousel-hero-controls {
-    bottom: auto;
+  /* 1110px wide like the source container, leaving 40px each side for the arrows */
+  .carousel-hero.caption {
+    max-width: min(1110px, 100% - 80px);
+    margin-inline: auto;
+  }
+
+  .carousel-hero.caption .carousel-hero-slide-image {
+    height: 450px;
+  }
+
+  .carousel-hero.caption .carousel-hero-slide-content :is(h1, h2, h3, p) {
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  /* 20 x 32 grey (#888) chevrons, 20px outside the photo, centred on it */
+  .carousel-hero.caption .carousel-hero-controls .carousel-hero-prev,
+  .carousel-hero.caption .carousel-hero-controls .carousel-hero-next {
+    display: block;
+    position: absolute;
+    top: 225px;
+    width: 20px;
+    color: #888;
+    transform: translateY(-50%);
+  }
+
+  .carousel-hero.caption .carousel-hero-controls .carousel-hero-prev {
+    left: -40px;
+  }
+
+  .carousel-hero.caption .carousel-hero-controls .carousel-hero-next {
+    right: -40px;
+  }
+
+  .carousel-hero.caption .carousel-hero-controls .carousel-hero-prev::before,
+  .carousel-hero.caption .carousel-hero-controls .carousel-hero-next::before {
+    width: 21px;
+    height: 21px;
+    border-width: 0 0 4px 4px;
   }
 }
 
@@ -432,31 +482,16 @@ main > .section > .carousel-hero-wrapper:has(> .carousel-hero.caption) {
   .carousel-hero.caption .carousel-hero-slide-image {
     position: relative;
     inset: auto;
+    height: 450px;
   }
 
   .carousel-hero.caption .carousel-hero-slide-content {
-    padding: 16px 24px;
-    background-color: rgb(0 0 0 / 60%);
+    padding: 25px 0;
+    background-color: rgb(0 0 0 / 30%);
     text-align: center;
   }
 
   .carousel-hero.caption .carousel-hero-slide-text-only {
     background-color: transparent;
-  }
-
-  /* arrows move into the gutters beside the photo, vertically centred on it */
-  .carousel-hero.caption .carousel-hero-controls .carousel-hero-prev,
-  .carousel-hero.caption .carousel-hero-controls .carousel-hero-next {
-    position: absolute;
-    top: calc(50% - 26px);
-    transform: translateY(-50%);
-  }
-
-  .carousel-hero.caption .carousel-hero-controls .carousel-hero-prev {
-    left: -44px;
-  }
-
-  .carousel-hero.caption .carousel-hero-controls .carousel-hero-next {
-    right: -44px;
   }
 }

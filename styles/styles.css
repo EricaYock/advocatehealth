@@ -621,18 +621,143 @@ main > .section.centered > .default-content-wrapper > .button-container > strong
   }
 }
 
+/* stylelint-disable no-descending-specificity -- sidebar panel rules are scoped to sidebar layouts */
+
 /*
  * section-metadata style=sidebar: on desktop the section becomes a right-hand column next to
  * the section before it (e.g. news listings + Recent Posts). Stacks below it on mobile.
+ * Both columns show their content as white "panels" (heading + following block), like the
+ * health enews source.
  */
+main > .section:has(+ .section.sidebar),
+main > .section.sidebar {
+  --panel-border: #f7f7f7;
+  --panel-shadow: rgb(0 0 0 / 6%) 0 1px 15px 0;
+  --panel-padding: 20px 30px;
+  --panel-gap: 50px;
+  --panel-heading-color: #212529;
+  --panel-accent: #05537b;
+}
+
+/* panel: a heading wrapper followed by a block wrapper reads as one card */
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper {
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
+  padding: var(--panel-padding);
+  margin-top: var(--panel-gap);
+  background-color: #fff;
+}
+
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:first-child {
+  margin-top: 0;
+}
+
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:has(+ div:not(.default-content-wrapper)) {
+  border-bottom: 0;
+  padding-bottom: 0;
+  clip-path: inset(-20px -20px 0);
+}
+
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper + div:not(.default-content-wrapper) {
+  border: 1px solid var(--panel-border);
+  border-top: 0;
+  box-shadow: var(--panel-shadow);
+  padding: var(--panel-padding);
+  padding-top: 0;
+  margin-top: 0;
+  background-color: #fff;
+  clip-path: inset(0 -20px -20px);
+}
+
+/* panel headings: uppercase title with a small "View All" link on the right */
+main > .section:has(+ .section.sidebar) > .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: 16px;
+}
+
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper > :is(h2, h3) {
+  margin: 0 0 8px;
+  padding-bottom: 20px;
+  font-weight: 500;
+  color: var(--panel-heading-color);
+  text-transform: uppercase;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 {
+  font-size: 28px;
+  line-height: 28px;
+}
+
+main > .section.sidebar > .default-content-wrapper > h3 {
+  flex-basis: 100%;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 10px;
+  text-transform: uppercase;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p a:any-link {
+  padding: 0 5px;
+  color: var(--panel-accent);
+  text-decoration: none;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p a:hover {
+  text-decoration: underline;
+}
+
+/* sidebar subscribe: full-width solid button */
+main > .section.sidebar .default-content-wrapper > p {
+  margin: 0 0 16px;
+}
+
+main > .section.sidebar .default-content-wrapper > p:last-child {
+  margin-bottom: 0;
+}
+
+main > .section.sidebar .default-content-wrapper .button-container {
+  display: block;
+}
+
+main > .section.sidebar .default-content-wrapper a.button:any-link {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #fff;
+  background-color: var(--panel-accent);
+}
+
+main > .section.sidebar .default-content-wrapper a.button:hover {
+  background-color: #003b5c;
+}
+
 @media (width >= 900px) {
   main:has(> .section.sidebar) {
     display: grid;
     grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, calc(min(100vw, var(--content-max-width)) - 360px))
-      360px
-      minmax(0, 1fr);
+      minmax(16px, 1fr)
+      minmax(0, 666px)
+      55px
+      389px
+      minmax(16px, 1fr);
     grid-auto-flow: row dense;
     align-items: start;
   }
@@ -646,7 +771,13 @@ main > .section.centered > .default-content-wrapper > .button-container > strong
   }
 
   main > .section.sidebar {
-    grid-column: 3;
+    grid-column: 4;
+  }
+
+  /* both columns start on the same line */
+  main > .section.sidebar,
+  main > .section:has(+ .section.sidebar) {
+    margin-top: 0;
   }
 
   main > .section.sidebar > div,
@@ -654,3 +785,4 @@ main > .section.centered > .default-content-wrapper > .button-container > strong
     max-width: none;
   }
 }
+/* stylelint-enable no-descending-specificity */

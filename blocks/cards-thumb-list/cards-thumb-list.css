@@ -8,10 +8,9 @@
 .cards-thumb-list .cards-thumb-list-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
   margin: 0;
-  padding: 8px 0;
-  border-top: 1px solid var(--brand-gray-border);
+  padding: 6px 3px;
+  border-top: 1px dotted rgb(221 221 221);
 }
 
 .cards-thumb-list .cards-thumb-list-item:first-child {
@@ -19,10 +18,14 @@
   border-top: 0;
 }
 
+/* 60x60 thumbnail inside a 4px gutter, 10px from the text */
 .cards-thumb-list .cards-thumb-list-image {
-  flex: 0 0 60px;
+  flex: 0 0 auto;
   width: 60px;
   height: 60px;
+  margin-right: 10px;
+  padding: 4px;
+  box-sizing: content-box;
 }
 
 .cards-thumb-list .cards-thumb-list-image picture,
@@ -43,28 +46,34 @@
 
 .cards-thumb-list .cards-thumb-list-body > * {
   margin: 0;
-  color: var(--text-color);
-  font-size: 14px;
-  line-height: 1.4;
+  color: rgb(33 37 41);
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .cards-thumb-list .cards-thumb-list-body .cards-thumb-list-title {
-  font-weight: 600;
+  margin-bottom: 3px;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .cards-thumb-list .cards-thumb-list-title a:any-link {
-  color: var(--link-color);
+  display: inline-block;
+  color: rgb(5 83 123);
+  font-weight: 700;
   text-decoration: none;
+  vertical-align: top;
 }
 
 .cards-thumb-list .cards-thumb-list-title a:hover,
 .cards-thumb-list .cards-thumb-list-title a:focus-visible {
-  color: var(--link-hover-color);
+  color: rgb(136 136 136);
   text-decoration: underline;
 }
 
 .cards-thumb-list .cards-thumb-list-body .cards-thumb-list-date {
-  margin-top: 2px;
-  color: var(--brand-text-muted);
+  padding: 0 3px 6px;
+  color: rgb(85 85 85);
   font-size: 12px;
+  line-height: 18px;
 }
