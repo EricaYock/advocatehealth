@@ -640,7 +640,7 @@ main > .section.sidebar {
 }
 
 /* panel: a heading wrapper followed by a block wrapper reads as one card */
-main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper {
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:not(:has(> h1)) {
   border: 1px solid var(--panel-border);
   box-shadow: var(--panel-shadow);
   padding: var(--panel-padding);
@@ -648,17 +648,17 @@ main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrappe
   background-color: #fff;
 }
 
-main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:first-child {
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:not(:has(> h1)):first-child {
   margin-top: 0;
 }
 
-main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:has(+ div:not(.default-content-wrapper)) {
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:not(:has(> h1)):has(+ div:not(.default-content-wrapper)) {
   border-bottom: 0;
   padding-bottom: 0;
   clip-path: inset(-20px -20px 0);
 }
 
-main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper + div:not(.default-content-wrapper) {
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:not(:has(> h1)) + div:not(.default-content-wrapper) {
   border: 1px solid var(--panel-border);
   border-top: 0;
   box-shadow: var(--panel-shadow);
@@ -670,7 +670,7 @@ main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrappe
 }
 
 /* panel headings: uppercase title with a small "View All" link on the right */
-main > .section:has(+ .section.sidebar) > .default-content-wrapper {
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:not(:has(> h1)) {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -678,7 +678,7 @@ main > .section:has(+ .section.sidebar) > .default-content-wrapper {
   column-gap: 16px;
 }
 
-main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper > :is(h2, h3) {
+main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrapper:not(:has(> h1)) > :is(h2, h3) {
   margin: 0 0 8px;
   padding-bottom: 20px;
   font-weight: 500;
@@ -686,18 +686,18 @@ main > .section:is(.sidebar, :has(+ .section.sidebar)) > .default-content-wrappe
   text-transform: uppercase;
 }
 
-main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 {
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:not(:has(> h1)) > h2 {
   font-size: 28px;
   line-height: 28px;
 }
 
-main > .section.sidebar > .default-content-wrapper > h3 {
+main > .section.sidebar > .default-content-wrapper:not(:has(> h1)) > h3 {
   flex-basis: 100%;
   font-size: 24px;
   line-height: 24px;
 }
 
-main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p {
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:not(:has(> h1)) > h2 + p {
   margin: 0;
   font-size: 10px;
   font-weight: 700;
@@ -705,13 +705,13 @@ main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p {
   text-transform: uppercase;
 }
 
-main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p a:any-link {
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:not(:has(> h1)) > h2 + p a:any-link {
   padding: 0 5px;
   color: var(--panel-accent);
   text-decoration: none;
 }
 
-main > .section:has(+ .section.sidebar) > .default-content-wrapper > h2 + p a:hover {
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:not(:has(> h1)) > h2 + p a:hover {
   text-decoration: underline;
 }
 
@@ -783,6 +783,193 @@ main > .section.sidebar .default-content-wrapper a.button:hover {
   main > .section.sidebar > div,
   main > .section:has(+ .section.sidebar) > div {
     max-width: none;
+  }
+}
+
+/*
+ * news article (the main-column wrapper that holds the H1): plain article typography,
+ * a related-posts heading, promo/find-a-doctor sidebar panels and the author box
+ */
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1),
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) ~ div {
+  padding-inline: 0;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--panel-accent);
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > h1 + p {
+  margin: 5px 0 20px;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > p {
+  margin: 0 0 16px;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > p:has(> picture:only-child) img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > h2 {
+  margin: 24px 0 8px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--panel-heading-color);
+}
+
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > ul {
+  margin: 0 0 16px 30px;
+  padding: 0;
+}
+
+/* last heading before a block (e.g. "Related Posts") uses the panel heading style */
+main > .section:has(+ .section.sidebar) > .default-content-wrapper:has(> h1) > h2:last-child {
+  margin-top: 40px;
+  font-size: 28px;
+  line-height: 28px;
+  text-transform: uppercase;
+}
+
+/* sidebar promo panel (starts with a logo image): grey box with a green bottom border */
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) > * {
+  margin: 0;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) {
+  padding: 25px 10px;
+  border: 25px solid #fff;
+  background: linear-gradient(#a4d65e, #a4d65e) bottom / 100% 3px no-repeat, #f4f5f5;
+  background-clip: padding-box;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) img {
+  display: block;
+  width: 147px;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) > h3 {
+  margin: 10px 0 12px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  text-transform: none;
+  color: #003b5c;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) > p {
+  margin: 0 0 16px;
+  color: #3c3c3c;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) a.button:any-link {
+  display: inline;
+  width: auto;
+  padding: 0;
+  border: 0;
+  font-weight: 700;
+  text-align: start;
+  color: #003b5c;
+  background: none;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> p:first-child > picture) a.button:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+/* find-a-doctor panel: state map on the left, buttons on the right */
+main > .section.sidebar > .default-content-wrapper:has(> h3 + p > picture):has(.button-container) {
+  display: grid;
+  grid-template-columns: 69px 1fr;
+  column-gap: 34px;
+  align-items: start;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> h3 + p > picture):has(.button-container) > h3 {
+  grid-column: 1 / -1;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> h3 + p > picture):has(.button-container) > h3 + p {
+  grid-row: span 3;
+  margin: 0;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> h3 + p > picture):has(.button-container) > h3 + p img {
+  display: block;
+  width: 69px;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+main > .section.sidebar > .default-content-wrapper:has(> h3 + p > picture):has(.button-container) > .button-container {
+  margin: 0 0 20px;
+}
+
+/* author box after the sidebar: continues the main column on desktop */
+main > .section.sidebar + .section.light-grey {
+  padding: 0;
+  background: none;
+}
+
+main > .section.sidebar + .section.light-grey > .default-content-wrapper {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  column-gap: 20px;
+  padding: 0 15px 5px 25px;
+  color: #777;
+  background-color: #eee;
+}
+
+main > .section.sidebar + .section.light-grey > .default-content-wrapper > * {
+  grid-column: 2;
+  margin: 0 0 10px;
+}
+
+main > .section.sidebar + .section.light-grey > .default-content-wrapper > h2 {
+  grid-column: 1 / -1;
+  margin: 0 -15px 0 -25px;
+  padding: 0 0 28px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--panel-heading-color);
+  background-color: #fff;
+}
+
+main > .section.sidebar + .section.light-grey > .default-content-wrapper > p:has(> picture) {
+  grid-column: 1;
+  grid-row: span 3;
+  margin-top: 10px;
+}
+
+main > .section.sidebar + .section.light-grey > .default-content-wrapper > p:has(> picture) img {
+  display: block;
+  width: 80px;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+main > .section.sidebar + .section.light-grey > .default-content-wrapper > p:first-of-type:not(:has(picture)),
+main > .section.sidebar + .section.light-grey > .default-content-wrapper > p:has(> picture) + p {
+  margin-top: 10px;
+}
+
+@media (width >= 900px) {
+  main > .section.sidebar + .section {
+    grid-column: 2;
   }
 }
 /* stylelint-enable no-descending-specificity */

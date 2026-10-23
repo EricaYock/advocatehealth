@@ -190,6 +190,37 @@ function decorateSectionMetadata(main) {
   });
 }
 
+/**
+ * In "sidebar" sections, split default content into one wrapper per heading-led group,
+ * so each widget (heading + its content) renders as its own panel.
+ * @param {Element} main The main element
+ */
+function splitSidebarPanels(main) {
+  main.querySelectorAll(':scope > .section.sidebar > .default-content-wrapper').forEach((wrapper) => {
+    const groups = [];
+    let current = [];
+    let hasHeading = false;
+    [...wrapper.children].forEach((child) => {
+      const isHeading = /^H[1-6]$/.test(child.tagName);
+      if (isHeading && hasHeading) {
+        groups.push(current);
+        current = [];
+        hasHeading = false;
+      }
+      if (isHeading) hasHeading = true;
+      current.push(child);
+    });
+    if (current.length) groups.push(current);
+    if (groups.length < 2) return;
+    groups.slice(1).reverse().forEach((group) => {
+      const panel = document.createElement('div');
+      panel.className = 'default-content-wrapper';
+      panel.append(...group);
+      wrapper.after(panel);
+    });
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
@@ -197,6 +228,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateSectionMetadata(main);
+  splitSidebarPanels(main);
   decorateBlocks(main);
   if (document.contains(main)) initPageSchemas();
 }

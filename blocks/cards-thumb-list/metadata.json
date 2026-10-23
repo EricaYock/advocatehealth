@@ -20,9 +20,10 @@
   },
   "usage": {
     "pagesUsing": [
-      "/"
+      "/",
+      "/en/news-center/can-an-air-purifier-actually-help-your-allergy-symptoms"
     ],
-    "reuseCount": 1,
+    "reuseCount": 2,
     "lastUsed": "2026-10-23"
   },
   "reuseGuidance": "Use for sidebar \"Recent posts\" style link lists. For full teasers with excerpts use cards-teaser-list."

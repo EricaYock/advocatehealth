@@ -79,3 +79,46 @@
     gap: 48px 24px;
   }
 }
+
+/* compact "Related Posts" row when used in a main column next to a sidebar (health enews article) */
+main > .section:has(+ .section.sidebar) .cards-article {
+  margin-top: 0;
+}
+
+main > .section:has(+ .section.sidebar) .cards-article > ul {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+main > .section:has(+ .section.sidebar) .cards-article .cards-article-image {
+  margin-bottom: 8px;
+}
+
+main > .section:has(+ .section.sidebar) .cards-article .cards-article-image > * {
+  margin: 0;
+}
+
+@media (width >= 600px) {
+  main > .section:has(+ .section.sidebar) .cards-article > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+main > .section:has(+ .section.sidebar) .cards-article .cards-article-image img {
+  width: 120px;
+  aspect-ratio: 4 / 3;
+  padding: 5px;
+  box-sizing: content-box;
+}
+
+main > .section:has(+ .section.sidebar) .cards-article .cards-article-body a:any-link {
+  font-size: 14px;
+  line-height: 1.1;
+  color: #555;
+  text-decoration: none;
+}
+
+main > .section:has(+ .section.sidebar) .cards-article .cards-article-body a:hover {
+  color: var(--panel-accent, #05537b);
+  text-decoration: underline;
+}

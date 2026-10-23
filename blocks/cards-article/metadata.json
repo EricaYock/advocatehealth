@@ -17,7 +17,14 @@
   },
   "options": [],
   "memberVariantIds": [],
-  "usage": "Place in a section styled `light-grey, centered`; section heading, intro and \"See all\" link stay as default content around the block. 1/2/4-column responsive grid.",
+  "usage": {
+    "pagesUsing": [
+      "/en/news-center/can-an-air-purifier-actually-help-your-allergy-symptoms"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-23"
+  },
   "reuseGuidance": "Use for news/story teaser grids. For icon quick links use `cards-icon-links`.",
-  "sourceUrl": "https://www.advocatehealth.com/"
+  "sourceUrl": "https://www.advocatehealth.com/",
+  "usageNotes": "Place in a section styled `light-grey, centered`; section heading, intro and \"See all\" link stay as default content around the block. 1/2/4-column responsive grid."
 }

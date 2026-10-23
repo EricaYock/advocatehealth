@@ -212,6 +212,80 @@
           ]
         }
       ]
+    },
+    {
+      "name": "news-article",
+      "urls": [
+        "https://www.ahchealthenews.com/2026/10/16/can-an-air-purifier-actually-help-your-allergy-symptoms/"
+      ],
+      "representativeUrl": "https://www.ahchealthenews.com/2026/10/16/can-an-air-purifier-actually-help-your-allergy-symptoms/",
+      "description": "health enews article page (ahchealthenews.com/YYYY/MM/DD/slug/) migrated under /en/news-center/{slug}",
+      "blocks": [
+        {
+          "name": "cards-article",
+          "instances": [
+            "#content ul.related-posts"
+          ]
+        },
+        {
+          "name": "cards-thumb-list",
+          "instances": [
+            "#content .widget_recent_entries .sposts-list"
+          ]
+        }
+      ],
+      "urlPattern": "/2026/10/16/*",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Article (main column)",
+          "selector": [
+            "#content > .postcontent"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            "#page_title",
+            ".entry_image",
+            ".entry_c > p",
+            ".entry_c > h5",
+            ".entry_c > ul",
+            "h3.titlebg"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Sidebar: LiveWell, Find a Doctor, Recent Posts, Subscribe",
+          "selector": [
+            "#content > .sidebar"
+          ],
+          "style": "sidebar",
+          "blocks": [
+            "cards-thumb-list"
+          ],
+          "defaultContent": [
+            "#livewell_widget-2",
+            ".find-a-doctor-widget",
+            "h4.widget-title",
+            ".hen-subscribe"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "About the Author",
+          "selector": [
+            ".hen-author-box"
+          ],
+          "style": "light-grey",
+          "blocks": [],
+          "defaultContent": [
+            "h4",
+            ".single-extra-box"
+          ]
+        }
+      ]
     }
   ],
   "metadata": {
