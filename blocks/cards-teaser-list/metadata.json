@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-teaser-list",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": [],
+  "sourceUrl": "https://www.ahchealthenews.com/",
+  "visualCharacteristics": {
+    "purpose": "Vertical list of article teasers: image, linked title, optional date and excerpt",
+    "description": "Stacked teasers in a white panel. Image (~260x150) left, text right from 600px (stacked on mobile): bold blue linked title, small grey date line, grey excerpt."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per teaser: cell 1 = image, cell 2 = linked title (paragraph link or heading), optional date paragraph, excerpt paragraph",
+    "sectionMetadata": [],
+    "sourceSelector": "#content > .postcontent"
+  },
+  "usage": {
+    "pagesUsing": [
+      "/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-23"
+  },
+  "reuseGuidance": "Use for news, recipe or story lists where each item is image + title + excerpt in a single column. Keep the list heading and \"View all\" link as default content above the block. For a multi-column image-top grid use cards-article; for compact sidebar lists use cards-thumb-list."
+}

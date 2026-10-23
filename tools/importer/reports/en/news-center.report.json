@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.ahchealthenews.com/",
+  "path": "en/news-center",
+  "timestamp": "2026-10-23T19:43:39.647Z",
+  "title": "health enews",
+  "template": "news-center",
+  "blocks": [
+    "carousel-hero",
+    "cards-teaser-list",
+    "cards-teaser-list",
+    "cards-teaser-list",
+    "cards-thumb-list"
+  ]
+}

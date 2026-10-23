@@ -11,9 +11,23 @@
     "sectionMetadata": [],
     "sourceSelector": "#__next > main.jsx-2228787498 > div.swiper.swiper-fade.swiper-initialized.swiper-horizontal.swiper-watch-progress._hero-banner-carousel_175t4_955.swiper-backface-hidden"
   },
-  "options": [],
+  "options": [
+    {
+      "class": "caption",
+      "label": "Caption",
+      "description": "Contained-width news slider: linked article photo with a dark translucent caption bar holding the linked title (no text or CTA); arrows beside the photo, dots below."
+    }
+  ],
   "memberVariantIds": [],
-  "usage": "Top-of-page hero with 2+ rotating messages. Autoplays (6s, cross-fade) with prev/pause/next and dot controls; autoplay is off when the user prefers reduced motion. A single row renders as a static hero without controls.",
+  "usage": {
+    "pagesUsing": [
+      "/en/news-center",
+      "/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-23"
+  },
   "reuseGuidance": "Use for page-top rotating banners with full-width imagery. For a static hero use `hero`; for contained image+text promos use `carousel-promo`.",
-  "sourceUrl": "https://www.advocatehealth.com/"
+  "sourceUrl": "https://www.advocatehealth.com/",
+  "usageNotes": "Top-of-page hero with 2+ rotating messages. Autoplays (6s, cross-fade) with prev/pause/next and dot controls; autoplay is off when the user prefers reduced motion. A single row renders as a static hero without controls."
 }

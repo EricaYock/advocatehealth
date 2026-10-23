@@ -10,7 +10,9 @@ Single block table. Content: 2 columns, one row per slide: cell 1 = background i
 
 ## Supported variations
 
-No variations.
+| Variation | Option class |
+| --- | --- |
+| Caption | `caption` |
 
 ## Universal Editor fields
 

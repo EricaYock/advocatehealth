@@ -138,6 +138,80 @@
           "defaultContent": []
         }
       ]
+    },
+    {
+      "name": "news-center",
+      "urls": [
+        "https://www.ahchealthenews.com/"
+      ],
+      "representativeUrl": "https://www.ahchealthenews.com/",
+      "description": "Health enews (ahchealthenews.com) homepage migrated as /en/news-center",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            "#news-slider"
+          ]
+        },
+        {
+          "name": "cards-teaser-list",
+          "instances": [
+            ".postcontent > .todays-news",
+            ".postcontent > .recipe-feed",
+            ".featured-stories .post-list:has(.post)"
+          ]
+        },
+        {
+          "name": "cards-thumb-list",
+          "instances": [
+            "#recent-posts-2 .sposts-list"
+          ]
+        }
+      ],
+      "urlPattern": "/",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Featured news slider",
+          "selector": [
+            "#news-slider"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "News listings (main column)",
+          "selector": [
+            "#content > .postcontent"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-teaser-list"
+          ],
+          "defaultContent": [
+            "h3.titlebg"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Sidebar: Recent Posts and Subscribe",
+          "selector": [
+            "#content > .sidebar"
+          ],
+          "style": "sidebar",
+          "blocks": [
+            "cards-thumb-list"
+          ],
+          "defaultContent": [
+            "h4.widget-title",
+            ".hen-subscribe"
+          ]
+        }
+      ]
     }
   ],
   "metadata": {

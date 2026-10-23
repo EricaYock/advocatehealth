@@ -1,0 +1,94 @@
+/* cards-teaser-list: stacked article teasers, image left (~1/3) and text right from 600px */
+.cards-teaser-list > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards-teaser-list .cards-teaser-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+}
+
+.cards-teaser-list .cards-teaser-list-image picture,
+.cards-teaser-list .cards-teaser-list-image img {
+  display: block;
+  width: 100%;
+}
+
+.cards-teaser-list .cards-teaser-list-image img {
+  height: auto;
+  aspect-ratio: 260 / 150;
+  object-fit: cover;
+}
+
+.cards-teaser-list .cards-teaser-list-body {
+  min-width: 0;
+}
+
+.cards-teaser-list .cards-teaser-list-body > * {
+  margin: 8px 0 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+}
+
+.cards-teaser-list .cards-teaser-list-body > :first-child {
+  margin-top: 0;
+}
+
+.cards-teaser-list .cards-teaser-list-body .cards-teaser-list-title {
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+}
+
+.cards-teaser-list .cards-teaser-list-title a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.cards-teaser-list .cards-teaser-list-title a:hover,
+.cards-teaser-list .cards-teaser-list-title a:focus-visible {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+.cards-teaser-list .cards-teaser-list-body .cards-teaser-list-date {
+  margin-top: 4px;
+  color: var(--brand-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (width >= 600px) {
+  .cards-teaser-list .cards-teaser-list-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .cards-teaser-list .cards-teaser-list-image {
+    flex: 0 0 calc(100% / 3);
+  }
+
+  .cards-teaser-list .cards-teaser-list-body {
+    flex: 1 1 auto;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-teaser-list .cards-teaser-list-item {
+    gap: 24px;
+  }
+
+  .cards-teaser-list .cards-teaser-list-image {
+    flex-basis: 40%;
+    max-width: 260px;
+  }
+}

@@ -620,3 +620,37 @@ main > .section.centered > .default-content-wrapper > .button-container > strong
     flex: 0 1 auto;
   }
 }
+
+/*
+ * section-metadata style=sidebar: on desktop the section becomes a right-hand column next to
+ * the section before it (e.g. news listings + Recent Posts). Stacks below it on mobile.
+ */
+@media (width >= 900px) {
+  main:has(> .section.sidebar) {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, calc(min(100vw, var(--content-max-width)) - 360px))
+      360px
+      minmax(0, 1fr);
+    grid-auto-flow: row dense;
+    align-items: start;
+  }
+
+  main:where(:has(> .section.sidebar)) > .section {
+    grid-column: 1 / -1;
+  }
+
+  main > .section:has(+ .section.sidebar) {
+    grid-column: 2;
+  }
+
+  main > .section.sidebar {
+    grid-column: 3;
+  }
+
+  main > .section.sidebar > div,
+  main > .section:has(+ .section.sidebar) > div {
+    max-width: none;
+  }
+}

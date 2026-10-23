@@ -1,0 +1,29 @@
+{
+  "variantName": "cards-thumb-list",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": [],
+  "sourceUrl": "https://www.ahchealthenews.com/",
+  "visualCharacteristics": {
+    "purpose": "Compact list of recent posts with small square thumbnails",
+    "description": "60x60 square thumbnail left, small blue linked title and small grey date right, hairline dividers between items."
+  },
+  "contentPattern": {
+    "structure": "2 columns, one row per post: cell 1 = thumbnail image, cell 2 = linked title, optional date paragraph",
+    "sectionMetadata": [
+      {
+        "style": "sidebar"
+      }
+    ],
+    "sourceSelector": "#content > .sidebar"
+  },
+  "usage": {
+    "pagesUsing": [
+      "/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-23"
+  },
+  "reuseGuidance": "Use for sidebar \"Recent posts\" style link lists. For full teasers with excerpts use cards-teaser-list."
+}
