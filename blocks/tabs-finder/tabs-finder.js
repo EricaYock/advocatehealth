@@ -1,5 +1,5 @@
 import { toClassName } from '../../scripts/aem.js';
-import { createTag } from '../../scripts/shared.js';
+import { createTag, fetchPlaceholders } from '../../scripts/shared.js';
 
 let tabsFinderCount = 0;
 
@@ -13,26 +13,62 @@ function selectTab(tabs, panels, index, focus = false) {
   if (focus) tabs[index].focus();
 }
 
+/*
+ * Code-owned finder: tabs, copy and links are defined here and are NOT authored on the page.
+ * Wording/URLs can be changed site-wide (and localized) via placeholders, e.g. keys
+ * "finder-doctor-tab", "finder-doctor-text", "finder-doctor-link", "finder-doctor-url".
+ */
+const FINDER_TABS = [
+  {
+    key: 'finderDoctor',
+    tab: 'Find a doctor',
+    text: 'Search for a doctor by name, specialty or location.',
+    link: 'Find a doctor',
+    url: '/doctors',
+  },
+  {
+    key: 'finderLocation',
+    tab: 'Find a location',
+    text: 'Search for a hospital, clinic or care location near you.',
+    link: 'Find a location',
+    url: '/locations',
+  },
+];
+
+function getTabConfig(defaults, placeholders) {
+  const value = (field) => placeholders[`${defaults.key}${field[0].toUpperCase()}${field.slice(1)}`] || defaults[field];
+  return {
+    tab: value('tab'), text: value('text'), link: value('link'), url: value('url'),
+  };
+}
+
+function buildPanelContent(config) {
+  const text = createTag('p', {}, config.text);
+  const link = createTag('a', { href: config.url, title: config.link, class: 'button primary' }, config.link);
+  const strong = createTag('strong');
+  strong.append(link);
+  const cta = createTag('p', { class: 'button-container' });
+  cta.append(strong);
+  return [text, cta];
+}
+
 /**
- * tabs-finder: one row per tab. Cell 1 = tab label, cell 2 = panel content
- * (e.g. intro text and a link to the doctor/location finder).
+ * tabs-finder: authors place an empty block; everything inside it is rendered from code.
  * @param {Element} block
  */
-export default function decorate(block) {
+export default async function decorate(block) {
   tabsFinderCount += 1;
   const id = `tabs-finder-${tabsFinderCount}`;
-  const rows = [...block.children].filter((row) => row.children.length);
-  if (!rows.length) return;
+  const placeholders = await fetchPlaceholders();
+  const configs = FINDER_TABS.map((defaults) => getTabConfig(defaults, placeholders));
 
   const tablist = createTag('div', { class: 'tabs-finder-list', role: 'tablist' });
   const panelsWrapper = createTag('div', { class: 'tabs-finder-panels' });
   const tabs = [];
   const panels = [];
 
-  rows.forEach((row, idx) => {
-    const [labelCell, contentCell] = row.children;
-    const label = labelCell?.textContent.trim() || '';
-    const slug = toClassName(label) || `tab-${idx + 1}`;
+  configs.forEach((config, idx) => {
+    const slug = toClassName(config.tab) || `tab-${idx + 1}`;
     const tabId = `${id}-tab-${slug}`;
     const panelId = `${id}-panel-${slug}`;
 
@@ -42,11 +78,7 @@ export default function decorate(block) {
       id: tabId,
       role: 'tab',
       'aria-controls': panelId,
-    });
-    // keep authored inline formatting (e.g. icons) in the label
-    tab.append(...(labelCell ? [...labelCell.childNodes] : []));
-    const onlyChild = tab.children.length === 1 && tab.firstElementChild;
-    if (onlyChild && onlyChild.tagName === 'P') onlyChild.replaceWith(...onlyChild.childNodes);
+    }, config.tab);
 
     const panel = createTag('div', {
       class: 'tabs-finder-panel',
@@ -55,7 +87,7 @@ export default function decorate(block) {
       'aria-labelledby': tabId,
       tabindex: '0',
     });
-    if (contentCell) panel.append(...contentCell.childNodes);
+    panel.append(...buildPanelContent(config));
 
     tab.addEventListener('click', () => selectTab(tabs, panels, idx));
     tabs.push(tab);

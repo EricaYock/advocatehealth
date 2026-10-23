@@ -36,6 +36,14 @@ export default function decorate(block) {
   });
 
   list.querySelectorAll('picture > img').forEach((img) => {
+    // The ?width/&format=webply rendition params only exist on the EDS media bus
+    // (same-origin images). External images (e.g. the health enews CDN) would get
+    // a <source type="image/webp"> pointing at a JPEG plus unsupported params, so
+    // keep their authored src untouched.
+    if (new URL(img.src, window.location.href).origin !== window.location.origin) {
+      img.loading = 'lazy';
+      return;
+    }
     img.closest('picture').replaceWith(
       createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]),
     );

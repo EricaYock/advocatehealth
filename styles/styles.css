@@ -595,3 +595,28 @@ main > .section.dark-blue a.button:focus-visible {
 .library-metadata-wrapper {
   display: none;
 }
+
+/* the full-bleed hero sits flush against the section that follows it, like the source */
+main > .section.carousel-hero-container {
+  margin-bottom: 0;
+}
+
+main > .section.carousel-hero-container + .section {
+  margin-top: 0;
+}
+
+/* responsive primary CTA: full width on phones, sized to its label from 600px (like the source) */
+main > .section.centered > .default-content-wrapper > .button-container > strong {
+  display: flex;
+  flex: 1;
+}
+
+main > .section.centered > .default-content-wrapper > .button-container > strong > a.button {
+  flex: 1;
+}
+
+@media (width >= 600px) {
+  main > .section.centered > .default-content-wrapper > .button-container > strong {
+    flex: 0 1 auto;
+  }
+}

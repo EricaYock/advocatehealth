@@ -1,6 +1,15 @@
-/* carousel-callout: structural styles only; colors/typography come from the design pass */
+/*
+ * carousel-callout: rotating text-only callouts on the dark-blue band.
+ * Section background, text colour and button inversion come from
+ * `.section.dark-blue` in styles.css; values below are from the source
+ * (advocatehealth.com "C06 - Promo Carousel CTA").
+ */
 .carousel-callout {
   position: relative;
+  box-sizing: border-box;
+  max-width: var(--content-max-width-narrow);
+  margin-inline: auto;
+  padding-inline: 16px;
 }
 
 .carousel-callout .carousel-callout-slides {
@@ -13,6 +22,9 @@
 /* slides stack in one grid cell and cross-fade */
 .carousel-callout .carousel-callout-slides > .carousel-callout-slide {
   grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.6s ease, visibility 0.6s;
@@ -21,6 +33,11 @@
 .carousel-callout .carousel-callout-slides > .carousel-callout-slide.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* optional image if an author adds one */
+.carousel-callout .carousel-callout-slide-image {
+  max-width: 320px;
 }
 
 .carousel-callout .carousel-callout-slide-image picture,
@@ -34,34 +51,44 @@
   object-fit: cover;
 }
 
-.carousel-callout .carousel-callout-slide-content > :first-child {
-  margin-top: 0;
+/* slide copy: H3 20/32 (24/32 at 1200 via tokens), body 16/24 */
+.carousel-callout .carousel-callout-slide-content {
+  flex: 1 1 auto;
 }
 
-.carousel-callout .carousel-callout-slide-content > :last-child {
-  margin-bottom: 0;
+.carousel-callout .carousel-callout-slide-content > * {
+  margin: 0;
 }
 
-/* controls: prev, pause/play, dots, next */
+.carousel-callout .carousel-callout-slide-content > :is(h2, h3, h4) + p {
+  margin-top: 16px;
+}
+
+.carousel-callout .carousel-callout-slide-content > .button-container {
+  margin-top: 32px;
+}
+
+/* controls: prev, pause/play, dots, next (white, centred below the copy) */
 .carousel-callout > .carousel-callout-controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding-block: 16px;
+  gap: 16px;
+  margin: 68px 0 4px;
+  padding: 0;
 }
 
 .carousel-callout .carousel-callout-controls button {
   appearance: none;
   position: relative;
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 16px;
+  height: 44px;
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
-  color: inherit;
+  color: var(--brand-white);
   cursor: pointer;
 }
 
@@ -70,21 +97,53 @@
   outline-offset: 2px;
 }
 
+/* prev / pause / play / next glyphs (Font Awesome sharp solid, 16x22) */
+.carousel-callout .carousel-callout-controls :is(.carousel-callout-prev, .carousel-callout-next, .carousel-callout-toggle)::before {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 16px;
+  height: 22px;
+  background-color: currentcolor;
+  mask: var(--carousel-callout-icon) center / contain no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.carousel-callout .carousel-callout-controls .carousel-callout-prev {
+  --carousel-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M3 256l22.6 22.6 192 192 22.6 22.6 45.3-45.3-22.6-22.6-169.4-169.4 169.4-169.4 22.6-22.6-45.3-45.3-22.6 22.6-192 192-22.6 22.6z'/%3E%3C/svg%3E");
+}
+
+.carousel-callout .carousel-callout-controls .carousel-callout-next {
+  --carousel-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M317.5 256L294.9 278.6 102.9 470.6 80.3 493.3 35 448 57.6 425.4 227 256 57.6 86.6 35 64 80.3 18.7 102.9 41.4 294.9 233.4 317.5 256z'/%3E%3C/svg%3E");
+}
+
+.carousel-callout .carousel-callout-controls .carousel-callout-toggle {
+  --carousel-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M160 32l-160 0 0 448 160 0 0-448zm224 0l-160 0 0 448 160 0 0-448z'/%3E%3C/svg%3E");
+}
+
+.carousel-callout .carousel-callout-controls .carousel-callout-toggle.paused {
+  --carousel-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M384 256L0 32V480L384 256z'/%3E%3C/svg%3E");
+}
+
+/* dots: 16px rings with 14px margin (44px hit area), active filled */
 .carousel-callout .carousel-callout-indicators {
   display: flex;
-  gap: 4px;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.carousel-callout .carousel-callout-controls .carousel-callout-indicator button {
+  width: 44px;
 }
 
 .carousel-callout .carousel-callout-controls .carousel-callout-indicator button::before {
   content: '';
   position: absolute;
   inset: 50% auto auto 50%;
-  width: 12px;
-  height: 12px;
-  border: 2px solid currentcolor;
+  width: 16px;
+  height: 16px;
+  border: 1px solid currentcolor;
   border-radius: 50%;
   box-sizing: border-box;
   transform: translate(-50%, -50%);
@@ -94,69 +153,31 @@
   background-color: currentcolor;
 }
 
-.carousel-callout .carousel-callout-controls .carousel-callout-prev::before,
-.carousel-callout .carousel-callout-controls .carousel-callout-next::before {
-  content: '';
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 10px;
-  height: 10px;
-  border: solid currentcolor;
-  border-width: 0 0 2px 2px;
-  transform: translate(-25%, -50%) rotate(45deg);
-}
-
-.carousel-callout .carousel-callout-controls .carousel-callout-next::before {
-  transform: translate(-75%, -50%) rotate(-135deg);
-}
-
-/* pause glyph (two bars); play glyph (triangle) when paused */
-.carousel-callout .carousel-callout-controls .carousel-callout-toggle::before {
-  content: '';
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 10px;
-  height: 14px;
-  box-sizing: border-box;
-  border: solid currentcolor;
-  border-width: 0 3px;
-  transform: translate(-50%, -50%);
-}
-
-.carousel-callout .carousel-callout-controls .carousel-callout-toggle.paused::before {
-  width: 0;
-  height: 0;
-  border-width: 7px 0 7px 12px;
-  border-color: transparent transparent transparent currentcolor;
-  transform: translate(-35%, -50%);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .carousel-callout .carousel-callout-slides > .carousel-callout-slide {
     transition: none;
   }
 }
 
-.carousel-callout .carousel-callout-slides .carousel-callout-slide {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* optional image if an author adds one */
-.carousel-callout .carousel-callout-slide-image {
-  max-width: 320px;
-}
-
 @media (width >= 900px) {
-  .carousel-callout .carousel-callout-slides .carousel-callout-slide {
+  .carousel-callout .carousel-callout-slides > .carousel-callout-slide {
     flex-direction: row;
-    align-items: center;
-    gap: 40px;
+    align-items: flex-start;
+    gap: 72px;
   }
 
-  .carousel-callout .carousel-callout-slide-content {
-    flex: 1 1 auto;
-    max-width: 900px;
+  .carousel-callout .carousel-callout-slide-content > .button-container {
+    margin-top: 40px;
+  }
+}
+
+/* source: 1196px column, controls 44px above the band's bottom edge */
+@media (width >= 1200px) {
+  .carousel-callout {
+    padding-inline: 48px;
+  }
+
+  .carousel-callout > .carousel-callout-controls {
+    margin: 100px 0 -28px;
   }
 }

@@ -94,33 +94,8 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/tabs-finder.js
-  var FINDERS = [
-    { match: /doctor|provider/i, href: "/doctors", text: "Search for a doctor by name, specialty or location." },
-    { match: /location/i, href: "/locations", text: "Search for a hospital, clinic or care location near you." }
-  ];
   function parse2(element, { document }) {
-    const cells = [];
-    const triggers = Array.from(element.querySelectorAll('[class*="tab-list_"] > button'));
-    triggers.forEach((trigger) => {
-      const label = trigger.textContent.trim();
-      if (!label) return;
-      const content = [];
-      const finder = FINDERS.find((f) => f.match.test(label));
-      if (finder) {
-        const text = document.createElement("p");
-        text.textContent = finder.text;
-        const p = document.createElement("p");
-        const a = document.createElement("a");
-        a.href = finder.href;
-        a.textContent = label;
-        const strong = document.createElement("strong");
-        strong.append(a);
-        p.append(strong);
-        content.push(text, p);
-      }
-      cells.push([label, content.length ? content : ""]);
-    });
-    const block = WebImporter.Blocks.createBlock(document, { name: "tabs-finder", cells });
+    const block = WebImporter.Blocks.createBlock(document, { name: "tabs-finder", cells: [] });
     element.replaceWith(block);
   }
 

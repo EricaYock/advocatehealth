@@ -1,8 +1,13 @@
-/* cards-article: structural styles only; colors/typography come from the design pass */
+/* cards-article: health enews article teasers (values from advocatehealth.com computed styles) */
+.cards-article {
+  margin-top: 24px;
+  text-align: start;
+}
+
 .cards-article > ul {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px 24px;
+  gap: 40px 8px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -11,10 +16,11 @@
 .cards-article .cards-article-item {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
 .cards-article .cards-article-image {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .cards-article .cards-article-image picture,
@@ -24,31 +30,52 @@
 }
 
 .cards-article .cards-article-image img {
-  aspect-ratio: 16 / 10;
+  height: auto;
+  aspect-ratio: 360 / 200;
   object-fit: cover;
+}
+
+.cards-article .cards-article-body > * {
+  margin: 16px 0 0;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  color: var(--brand-text);
 }
 
 .cards-article .cards-article-body > :first-child {
   margin-top: 0;
 }
 
-.cards-article .cards-article-body > :last-child {
-  margin-bottom: 0;
+.cards-article .cards-article-body a:any-link {
+  display: block;
+  font-weight: 700;
+  color: var(--link-color);
+  text-decoration: underline;
 }
 
-.cards-article .cards-article-body a:any-link {
-  text-decoration: underline;
-  font-weight: 700;
+.cards-article .cards-article-body a:hover,
+.cards-article .cards-article-body a:focus {
+  color: var(--link-hover-color);
 }
 
 @media (width >= 600px) {
   .cards-article > ul {
     grid-template-columns: repeat(2, 1fr);
+    gap: 48px 16px;
+  }
+
+  .cards-article .cards-article-image img {
+    aspect-ratio: 342 / 200;
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 1200px) {
+  .cards-article {
+    margin-top: 48px;
+  }
+
   .cards-article > ul {
     grid-template-columns: repeat(4, 1fr);
+    gap: 48px 24px;
   }
 }
