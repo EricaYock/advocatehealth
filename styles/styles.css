@@ -1154,6 +1154,11 @@ main:has(> .section.left-nav) > .section > .default-content-wrapper > h1 + .butt
     margin-bottom: var(--section-padding);
   }
 
+  /* a section left empty (e.g. the page metadata section) adds no space */
+  main:has(> .section.left-nav) > .section:empty {
+    padding-top: 0;
+  }
+
   main:has(> .section.left-nav) > .section > .default-content-wrapper > h1 + .button-container {
     margin: 68px 0 40px;
   }
