@@ -48,10 +48,11 @@ export default function transform(hookName, element, payload) {
       const marker = element.querySelector(`hr[${MARKER}="${section.id}"]`);
       if (!marker) continue;
 
-      // Section content runs from marker to the next <hr> (or end of parent)
+      // Section content runs from marker to the next <hr> (or end of parent);
+      // a sibling that contains a later section break also ends the section
       let last = marker;
       let next = marker.nextElementSibling;
-      while (next && next.tagName !== 'HR') {
+      while (next && next.tagName !== 'HR' && !next.querySelector('hr')) {
         last = next;
         next = next.nextElementSibling;
       }

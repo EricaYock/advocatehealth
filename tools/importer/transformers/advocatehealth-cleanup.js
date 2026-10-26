@@ -49,6 +49,23 @@ export default function transform(hookName, element, payload) {
       strong.append(a);
     });
 
+    // Button groups (several buttons side by side): one paragraph per button,
+    // otherwise the adjacent <strong>s merge into a single paragraph
+    const groups = new Set();
+    element.querySelectorAll('strong > a.r-btn').forEach((a) => {
+      const group = a.parentElement.parentElement;
+      if (!group || group.tagName === 'P') return;
+      const kids = [...group.children];
+      if (kids.length > 1 && kids.every((k) => k.tagName === 'STRONG')) groups.add(group);
+    });
+    groups.forEach((group) => {
+      [...group.children].forEach((strong) => {
+        const p = (element.ownerDocument || payload.document).createElement('p');
+        strong.replaceWith(p);
+        p.append(strong);
+      });
+    });
+
     // Link-only column grids (e.g. Featured services) become an authorable list
     const doc = element.ownerDocument || payload.document;
     element.querySelectorAll('[class*="column-grid_"]').forEach((grid) => {

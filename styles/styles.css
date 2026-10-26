@@ -973,3 +973,189 @@ main > .section.sidebar + .section.light-grey > .default-content-wrapper > p:has
   }
 }
 /* stylelint-enable no-descending-specificity */
+
+/* stylelint-disable no-descending-specificity -- left-nav and button-group rules are scoped to their own sections */
+
+/*
+ * section-metadata style=left-nav: sub-page navigation (back link + page list) in a grey box,
+ * e.g. condition pages. On desktop it becomes a left-hand column (1/3) next to all the sections
+ * that follow it; on mobile it sits above them.
+ */
+main:has(> .section.left-nav) {
+  padding-top: var(--space-l);
+}
+
+main > .section.left-nav > .default-content-wrapper {
+  margin-inline: var(--content-padding-inline);
+  padding: 16px;
+  background-color: var(--brand-white-smoke);
+}
+
+main > .section.left-nav > .default-content-wrapper > p {
+  position: relative;
+  margin: 0;
+  padding-left: 31px;
+  font-weight: 700;
+}
+
+main > .section.left-nav > .default-content-wrapper > p::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 3px;
+  width: 7px;
+  height: 7px;
+  border-bottom: 2px solid var(--brand-blue);
+  border-left: 2px solid var(--brand-blue);
+  transform: rotate(45deg);
+}
+
+main > .section.left-nav > .default-content-wrapper > p a:any-link {
+  text-decoration: underline;
+}
+
+main > .section.left-nav > .default-content-wrapper > ul {
+  margin: 0;
+  padding-left: 31px;
+  list-style: none;
+}
+
+main > .section.left-nav > .default-content-wrapper > ul > li {
+  margin: 16px 0 0;
+}
+
+main > .section.left-nav > .default-content-wrapper > ul a:any-link {
+  color: var(--brand-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+main > .section.left-nav > .default-content-wrapper > ul a:hover {
+  text-decoration: underline;
+}
+
+/* heading icons (:icon-name: before the heading text), e.g. "Need care?" */
+main > .section > .default-content-wrapper > :is(h1, h2, h3) > .icon {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+  vertical-align: middle;
+}
+
+/* centred button groups (several lone bold links in a row): full-width buttons, 2 per row */
+main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 24px;
+}
+
+main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) > * {
+  grid-column: 1 / -1;
+  margin-block: 0;
+}
+
+main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) > * + :not(.button-container) {
+  margin-top: 24px;
+}
+
+main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) > .button-container {
+  grid-column: auto;
+  margin: 16px 0 0;
+}
+
+main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) > :not(.button-container) + .button-container {
+  margin-top: 48px;
+}
+
+main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) > .button-container > strong {
+  flex: 1;
+}
+
+@media (width >= 600px) {
+  main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  main > .section.centered > .default-content-wrapper:has(> .button-container + .button-container) > :not(.button-container) + .button-container + .button-container {
+    margin-top: 48px;
+  }
+}
+
+/* page title with a call-to-action button below it */
+main:has(> .section.left-nav) > .section > .default-content-wrapper > h1 {
+  margin-bottom: 0;
+}
+
+main:has(> .section.left-nav) > .section > .default-content-wrapper > h1 + .button-container {
+  margin: 24px 0;
+}
+
+main:has(> .section.left-nav) > .section > .default-content-wrapper > h1 + .button-container a.button:any-link {
+  padding-block: 8px;
+}
+
+@media (width >= 900px) {
+  main:has(> .section.left-nav) {
+    --left-nav-gap: 24px;
+    --left-nav-width: calc(min(100%, var(--content-max-width)) - 2 * var(--content-padding-inline) - var(--left-nav-gap));
+
+    display: grid;
+    grid-template-columns:
+      1fr
+      calc(var(--left-nav-width) / 3)
+      var(--left-nav-gap)
+      calc(var(--left-nav-width) * 2 / 3)
+      1fr;
+    align-items: start;
+    padding-top: 56px;
+  }
+
+  main:where(:has(> .section.left-nav)) > .section {
+    grid-column: 4;
+  }
+
+  main > .section.left-nav {
+    grid-column: 2;
+    grid-row: 1 / span 30;
+  }
+
+  main:has(> .section.left-nav) > .section {
+    margin-block: 0;
+    padding-top: 40px;
+  }
+
+  main:has(> .section.left-nav) > .section.left-nav {
+    padding-top: 0;
+  }
+
+  main:has(> .section.left-nav) > .section:not(.left-nav) > div {
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  main > .section.left-nav > .default-content-wrapper {
+    margin-inline: 0;
+  }
+
+  main:has(> .section.left-nav) > .section.light-grey {
+    margin-top: 48px;
+    padding-block: var(--section-padding);
+  }
+
+  main:has(> .section.left-nav) > .section.light-grey > div {
+    padding-inline: 16px;
+  }
+
+  main:has(> .section.left-nav) > .section.centered:not(.light-grey) {
+    padding-top: var(--section-padding);
+  }
+
+  main:has(> .section.left-nav) > .section:last-child {
+    margin-bottom: var(--section-padding);
+  }
+
+  main:has(> .section.left-nav) > .section > .default-content-wrapper > h1 + .button-container {
+    margin: 68px 0 40px;
+  }
+}
+/* stylelint-enable no-descending-specificity */

@@ -221,8 +221,27 @@ function splitSidebarPanels(main) {
   });
 }
 
+/**
+ * Converts leading :icon-name: shorthand in headings (left as text by some renderers)
+ * into an icon span, e.g. "<h2>:people-group: Need care?</h2>".
+ * @param {Element} main
+ */
+function decorateHeadingIcons(main) {
+  main.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+    const text = heading.firstChild;
+    if (!text || text.nodeType !== Node.TEXT_NODE) return;
+    const match = text.textContent.match(/^\s*:([a-z0-9-]+):\s*/);
+    if (!match) return;
+    text.textContent = text.textContent.slice(match[0].length);
+    const icon = document.createElement('span');
+    icon.className = `icon icon-${match[1]}`;
+    heading.prepend(icon);
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
+  decorateHeadingIcons(main);
   decorateIcons(main);
   inlineColorIcons(main);
   buildAutoBlocks(main);
